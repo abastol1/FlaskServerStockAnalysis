@@ -12,31 +12,29 @@ from urllib.request import Request, urlopen
 class WebScrapYahooFinance(object):
 
 	"""
-	def cleanTweets():
+	def __init__():
 
 	NAME
 			
-			def cleanTweets(): Cleans Tweet by applying regular expressions
+			def __init__: Constructor for class 
 	SYNOPSIS
 
-	        def cleanTweets(self, tweet)
+	        def __init__(self, ticker)
 
 	            self: Represents the instance of the class
-	            tweet: Tweet extracted from Twitter
+	            ticker: Tikcer for each company(used when acessing data
+	            			from Yahoo Finance)
 
 	DESCRIPTION
 
-	        This is a function that takes a single tweet as a parameter and
-	        applies multiple regular expression to clean tweet. First it applies 
-			regular expression to remove URLs from tweet. It then removes all
-			RT||CC(retweet symbol) from tweet. It then removes all the hashtags
-			from tweet. After that, it removes mentioned username if any. Also,
-			removes all the unnecessary characters and punctuations. Finally
-			removes emojis from tweet
+	        This is a constructor for class WebScrapYahooFinance. It 
+	        creates a url with the company's ticker. It also ignores all 
+	        the SSL certificate errors that might appear while scraping
+	        yahoo finance for data
 
 	RETURNS
 
-	        Returns tweet after cleaning, only text
+	        None
 
 	AUTHOR
 
@@ -44,7 +42,7 @@ class WebScrapYahooFinance(object):
 
 	DATE
 
-	        10:15 PM 08/28/2019
+	        12:18 PM 09/12/2019
 
 	"""
 	def __init__(self, ticker):
@@ -58,31 +56,27 @@ class WebScrapYahooFinance(object):
 
 
 	"""
-	def cleanTweets():
+	def parseData():
 
 	NAME
 			
-			def cleanTweets(): Cleans Tweet by applying regular expressions
+			def parse: Scraps Yahoo finance and parses the html data
 	SYNOPSIS
 
-	        def cleanTweets(self, tweet)
+	        def parse(self)
 
 	            self: Represents the instance of the class
-	            tweet: Tweet extracted from Twitter
 
 	DESCRIPTION
 
-	        This is a function that takes a single tweet as a parameter and
-	        applies multiple regular expression to clean tweet. First it applies 
-			regular expression to remove URLs from tweet. It then removes all
-			RT||CC(retweet symbol) from tweet. It then removes all the hashtags
-			from tweet. After that, it removes mentioned username if any. Also,
-			removes all the unnecessary characters and punctuations. Finally
-			removes emojis from tweet
+	        This function creates a request to Yahoo Finance, reads 
+	        the sourecode and prettifies the html file using BeautifulSoup
+	        Extracts PRESENT_VALUE, PRESENT_GROWTH, PREV_CLOSE, OPEN
+	        DIVIDEND_AND_YIELD, ONE_YEAR_TARGET_PRICE.
 
 	RETURNS
 
-	        Returns tweet after cleaning, only text
+	        Returns Current stock data to the server
 
 	AUTHOR
 
@@ -90,7 +84,7 @@ class WebScrapYahooFinance(object):
 
 	DATE
 
-	        10:15 PM 08/28/2019
+	        12:39 PM 09/12/2019
 
 	"""
 	def parseData(self):

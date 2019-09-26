@@ -6,6 +6,10 @@ from datetime import date
 
 class ScrapStockHistory(object):
 
+    # Tickers: Stores tickers for all the company names
+    # startDate: startDate from which stock data is download
+    # endDate: All stock data withing startDate and endDate are
+                # recorded
     def __init__(self, tickers, startDate, endDate):
         self.tickers = tickers
         self.startDate = startDate
@@ -13,31 +17,29 @@ class ScrapStockHistory(object):
 
 
     """
-    def cleanTweets():
+    def downloadStockData():
 
     NAME
             
-            def cleanTweets(): Cleans Tweet by applying regular expressions
+            def downloadStockData(): Web Scraps all the yahoo finance 
+                                    data of a comapany(one year data)
     SYNOPSIS
 
             def cleanTweets(self, tweet)
 
                 self: Represents the instance of the class
-                tweet: Tweet extracted from Twitter
 
     DESCRIPTION
-
-            This is a function that takes a single tweet as a parameter and
-            applies multiple regular expression to clean tweet. First it applies 
-            regular expression to remove URLs from tweet. It then removes all
-            RT||CC(retweet symbol) from tweet. It then removes all the hashtags
-            from tweet. After that, it removes mentioned username if any. Also,
-            removes all the unnecessary characters and punctuations. Finally
-            removes emojis from tweet
+            
+            This function downloads stock history of one year, creates
+            a folder called stock_data, and creates .csv file with 
+            stock data in the file. For security reason, request
+            is sent 50 times, and the program sleeps for 10 seconds.
+            It avoids Yahoo Finance from blocking access to stock data
 
     RETURNS
 
-            Returns tweet after cleaning, only text
+            Returns nothing
 
     AUTHOR
 
@@ -45,7 +47,7 @@ class ScrapStockHistory(object):
 
     DATE
 
-            10:15 PM 08/28/2019
+            10:17 PM 09/12/2019
 
     """
     def downloadStockData(self):
@@ -74,31 +76,27 @@ class ScrapStockHistory(object):
         return
 
 """
-def cleanTweets():
+def main():
 
 NAME
         
-        def cleanTweets(): Cleans Tweet by applying regular expressions
+        def main: Specifies enddate and startdate and calls
+                    downloadStockData function 
 SYNOPSIS
 
-        def cleanTweets(self, tweet)
+        def main
 
-            self: Represents the instance of the class
-            tweet: Tweet extracted from Twitter
 
 DESCRIPTION
 
-        This is a function that takes a single tweet as a parameter and
-        applies multiple regular expression to clean tweet. First it applies 
-        regular expression to remove URLs from tweet. It then removes all
-        RT||CC(retweet symbol) from tweet. It then removes all the hashtags
-        from tweet. After that, it removes mentioned username if any. Also,
-        removes all the unnecessary characters and punctuations. Finally
-        removes emojis from tweet
+        This is a main function for ScrapStockHistory class. It stores
+        ticker of each company. Specifies today's date as endDate and
+        startDate one year until today. Initializes object for 
+        ScrapStockHistory class and calls the downloadStockDate function
 
 RETURNS
 
-        Returns tweet after cleaning, only text
+        None
 
 AUTHOR
 
@@ -106,7 +104,7 @@ AUTHOR
 
 DATE
 
-        10:15 PM 08/28/2019
+        11:19 PM 09/12/2019
 
 """ 
 def main():

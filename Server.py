@@ -28,31 +28,31 @@ companyTicker = {
 }	
 
 """
-def cleanTweets():
+		@app.route('/<nameCompany>', methods=['GET']):getTweetsDetail():
 
 NAME
 		
-		def cleanTweets(): Cleans Tweet by applying regular expressions
+		def getTweetsDetail: Flask Get method to get tweets details 
 SYNOPSIS
 
-        def cleanTweets(self, tweet)
+		@app.route('/<nameCompany>', methods=['GET'])
+		def getTweetsDetail(nameCompany):
 
-            self: Represents the instance of the class
-            tweet: Tweet extracted from Twitter
+            /<nameCompany>: server call is made to this url
+            methods=['GET']: GET method that returns json object to
+            nameCompany: name of the company whose tweets details are extracted
 
 DESCRIPTION
 
-        This is a function that takes a single tweet as a parameter and
-        applies multiple regular expression to clean tweet. First it applies 
-		regular expression to remove URLs from tweet. It then removes all
-		RT||CC(retweet symbol) from tweet. It then removes all the hashtags
-		from tweet. After that, it removes mentioned username if any. Also,
-		removes all the unnecessary characters and punctuations. Finally
-		removes emojis from tweet
+        This is a GET method for flask server. It receives name of a comapany
+        through api request. Creates instance of TwitterClient class, calls
+        'getTweets' function in TwitterClient by passing number of tweets and]
+        name of the company
 
 RETURNS
 
-        Returns tweet after cleaning, only text
+        Returns tweetDetails. The 'tweetDetails' dictionary contains tweets, 
+        					number of positive, negative and neutral tweets
 
 AUTHOR
 
@@ -60,7 +60,7 @@ AUTHOR
 
 DATE
 
-        10:15 PM 08/28/2019
+        03:15 PM 09/12/2019
 
 """
 @app.route('/<nameCompany>', methods=['GET'])
@@ -74,32 +74,37 @@ def getTweetsDetail(nameCompany):
 	# print(tweetsDetail)
 	return tweetsDetail
 
+
 """
-def cleanTweets():
+		@app.route('/currentstock/<nameCompany>', methods=['GET']):
+		def getCurrentDetail(nameCompany)
 
 NAME
 		
-		def cleanTweets(): Cleans Tweet by applying regular expressions
+		def getCurrentDetail: Flask GET method that contains information
+							about current stock of a company
 SYNOPSIS
 
-        def cleanTweets(self, tweet)
+		@app.route('/currentstock/<nameCompany>', methods=['GET']):
+		def getCurrentDetail(nameCompany)
 
-            self: Represents the instance of the class
-            tweet: Tweet extracted from Twitter
+            /currentstock/<nameCompany>: server call is made to this url
+            methods=['GET']: GET method that returns json object to
+            nameCompany: name of the company whose current stock details 
+            			 are extracted from Yahoo Finance
 
 DESCRIPTION
 
-        This is a function that takes a single tweet as a parameter and
-        applies multiple regular expression to clean tweet. First it applies 
-		regular expression to remove URLs from tweet. It then removes all
-		RT||CC(retweet symbol) from tweet. It then removes all the hashtags
-		from tweet. After that, it removes mentioned username if any. Also,
-		removes all the unnecessary characters and punctuations. Finally
-		removes emojis from tweet
+        This is a GET method for flask server. It receives name of a comapany
+        through api request. Creates instance of WebScrapYahooFinance class by 
+        passing company's ticker, calls 'parseData()' function in 
+        WebScrapYahooFinance.
 
 RETURNS
 
-        Returns tweet after cleaning, only text
+        Returns webData. WebData Stores Previous Close, Open, Fifty_two-WK_range, 
+        TD_VOLUME, AVERAGE_VOLUME_3MONTH, MARKET_CAP, PE_RATIO, EPS_RATIO, 
+        DIVIDEND_AND_YIELD, EX_DIVIDEND_DATE, ONE_YEAR_TARGET_PRICE 
 
 AUTHOR
 
@@ -107,7 +112,7 @@ AUTHOR
 
 DATE
 
-        10:15 PM 08/28/2019
+        03:49 PM 09/12/2019
 
 """
 @app.route('/currentstock/<nameCompany>', methods=['GET'])
@@ -121,31 +126,31 @@ def getCurrentDetail(nameCompany):
 
 
 """
-def cleanTweets():
-
+		@app.route('/graphdetail/<nameCompany>', methods=["GET"])
+		def returnGraphDetail(nameCompany):
+		
 NAME
 		
-		def cleanTweets(): Cleans Tweet by applying regular expressions
+		def returnGraphDetail: Flask Get method to get datapoints for graph
 SYNOPSIS
 
-        def cleanTweets(self, tweet)
+		@app.route('/graphdetail/<nameCompany>', methods=["GET"])
+		def returnGraphDetail(nameCompany):
 
-            self: Represents the instance of the class
-            tweet: Tweet extracted from Twitter
+            /graphdetail<nameCompany>: server call is made to this url
+            methods=['GET']: GET method that returns json object to
+            nameCompany: name of the company whose datapoints are requested
 
 DESCRIPTION
 
-        This is a function that takes a single tweet as a parameter and
-        applies multiple regular expression to clean tweet. First it applies 
-		regular expression to remove URLs from tweet. It then removes all
-		RT||CC(retweet symbol) from tweet. It then removes all the hashtags
-		from tweet. After that, it removes mentioned username if any. Also,
-		removes all the unnecessary characters and punctuations. Finally
-		removes emojis from tweet
-
+        This is a GET method for flask server. It receives name of a comapany
+        through api request. Reads .csv file from Assets folder and stores the
+        content of file in a pandas dataframe. Drops all the columns but Date and
+        Close. Iterates over the dataframe and store Date and CLosing price in 
+        an array. 
 RETURNS
 
-        Returns tweet after cleaning, only text
+        Returns dataToReturn. 'dataToReturn' contains a array of array[Date, Close]
 
 AUTHOR
 
@@ -153,9 +158,10 @@ AUTHOR
 
 DATE
 
-        10:15 PM 08/28/2019
+        05:29 PM 09/12/2019
 
 """
+
 @app.route('/graphdetail/<nameCompany>', methods=["GET"])
 def returnGraphDetail(nameCompany):
 	
@@ -187,6 +193,7 @@ def returnGraphDetail(nameCompany):
 
 	dataToReturn = {}
 	dataToReturn['Data'] = dateAndClose
+	# can only send JSON object over this server
 	return dataToReturn
 
 if __name__ == '__main__':
