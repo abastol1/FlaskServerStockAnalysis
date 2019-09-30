@@ -4,6 +4,8 @@ from TwitterSentiment import TwitterClient
 from WebScrappingYahooFinance import WebScrapYahooFinance
 from flask_ngrok import run_with_ngrok
 import pandas as pd
+from Database import DataBase
+
 
 app = Flask(__name__)
 
@@ -195,6 +197,52 @@ def returnGraphDetail(nameCompany):
 	dataToReturn['Data'] = dateAndClose
 	# can only send JSON object over this server
 	return dataToReturn
+
+
+"""
+		@app.route('/prediction/<nameCompany>', methods=["GET"])
+		def returnPrediction(nameCompany):
+		
+NAME
+		
+		def returnPrediction: Flask Get method to get stock prediction
+SYNOPSIS
+
+		@app.route('/prediction/<nameCompany>', methods=["GET"])
+		def returnPrediction(nameCompany)
+
+            /prediction<nameCompany>: server call is made to this url
+            methods=['GET']: GET method that returns prediction score from
+            					Database
+
+DESCRIPTION
+
+        This is a GET method for flask server. It receives name of a comapany
+        through api request. Creates instance of DataBase class and calls
+        'getPredictedClose' by passing company's ticker name.
+RETURNS
+
+        Returns toreturn. 'toreturn' contains predicted value of close
+
+AUTHOR
+
+        Anuj Bastola
+
+DATE
+
+        05:29 PM 09/12/2019
+
+"""
+
+@app.route('/prediction/<nameCompany>', methods=["GET"])
+def returnPrediction(nameCompany):
+
+	ticker = companyTicker[nameCompany]
+	database = DataBase()
+	toreturn = {}
+	toreturn['prediction'] = database.getPredictedClose(ticker)
+
+	return toreturn
 
 if __name__ == '__main__':
    app.run()

@@ -199,7 +199,7 @@ class TwitterClient(object):
 
 	DESCRIPTION
 
-	        This is a function calls api.search of tweepy and gets all the 
+	        This is a function that calls api.search of tweepy and gets all the 
 	        information of tweets. for every tweet in fetched_tweets, it applies 
 	        cleanTweets function and gets the sentiment for each tweet.
 	        It stores all the tweets in a dictionary 'dataToSend'. 'dataToSend'

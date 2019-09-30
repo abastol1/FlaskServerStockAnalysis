@@ -123,7 +123,7 @@ def main():
     todayDate = date.today()
 
     # Day from where 
-    startDate = '%s-%s-%s' % (todayDate.month, todayDate.day, (todayDate.year - 1))
+    startDate = '%s-%s-%s' % ((todayDate.month - 1), todayDate.day, (todayDate.year))
     # day till which the data will be gathered
     todayDate = '%s-%s-%s' % (todayDate.month, todayDate.day, todayDate.year)
     # print("End Date: " + str(todayDate))
