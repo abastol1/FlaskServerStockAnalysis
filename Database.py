@@ -16,21 +16,29 @@ class DataBase(object):
 			port = url.port
 			)
 
+	# Drops table from a database. 
+	# Every morning, the table is dropped and new table with a new prediction is created. 
 	def dropEverything(self):
 		cursor = self.conn.cursor()
 		cursor.execute("DROP TABLE MARKET")
 		self.conn.commit()
 		
+	# When Prediction.py is run, it drops the old table and creates a new one. 
+	# It creates a table with two-column, ticker column which is primary key for the database and prediction column
 	def createDatabase(self):
 		cursor = self.conn.cursor()
 		cursor.execute("CREATE TABLE IF NOT EXISTS Market ( ticker char(20) PRIMARY KEY, prediction varchar(20) )")
 		self.conn.commit()
 
+	# This function gets tickerName and predictedClose from Prediction.py 
+	# and stores it in the database. 
 	def storePrediction(self, tickerName, predictedClose):
 		cursor = self.conn.cursor()
 		cursor.execute("INSERT INTO Market (ticker, prediction) VALUES (%s, %s);", (tickerName, predictedClose))
 		self.conn.commit()
 
+	# Gets ticker from server and searches for data with tickerName=ticker 
+	# from server and returns predicted the closing price. 
 	def getPredictedClose(self, ticker):
 		cursor = self.conn.cursor()
 		cursor.execute("SELECT prediction FROM Market WHERE ticker = %s; ", (ticker,))
@@ -39,6 +47,7 @@ class DataBase(object):
 		print("Returned Data: ", data)
 		return data
 
+# For testing purpose
 def main():
 	
 	database = DataBase()

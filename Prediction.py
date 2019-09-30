@@ -12,14 +12,26 @@ from sklearn.svm import SVR
 from datetime import date
 from Database import DataBase
 
+# I have used non-linear SVR model for my prediction. 
+# Non-linear SVR transforms data into a higher dimensional feature space 
+# to make it possible to perform linear separation. 
+# The reason I decided to use SVR model is to make non-linear regression, 
+# i.e. fitting a curve rather than a line. 
+# The model is represented as combinations of the training points rather than a function of the features and some weights.  
+
+
 class Prediction(object):
 
+	# Reads data from CSV file into a dataframe and 
+	# initializes the dataframe and ticker in class variables. 
 	def __init__(self, ticker):
 		self.df = pd.read_csv('./stock_data/' + ticker + '.csv')
 		self.ticker = ticker
 		# self.ticker =
 
-
+	# This function splits datasets into two different data sets ‘dates’ and ‘prices. 
+	# ‘date’ and ‘prices’ are given value from CSV file. 
+	# The CSV file is updated every day. 
 	def SplitData(self):
 		dates = []
 		prices = []
@@ -40,6 +52,11 @@ class Prediction(object):
 
 		return [dates, prices]
 
+
+	# This function creates Support Vector Regression model 
+	# with RBF (Radial Basis Function) kernel. 
+	# It trains the model with the dates and prices data. 
+	# It then plots a graph with initial datasets and predicted datasets. 
 	def predictClosePrice(self, dates, prices, topredict):
 		print("To predict: ", topredict)
 
@@ -62,6 +79,14 @@ class Prediction(object):
 		return rbf.predict(topredict)[0]
 
 
+"""
+	The main function first initializes Database class. 
+	It then drops the old data from the database and creates a new table with no data. 
+	It then does prediction for all the companies by passing tickerName and nextDay number. 
+	Once the prediction is done, it calls ‘database.storePrediction’ function 
+	which stores tickerName and prediction on the ElephantSQL database
+
+"""
 def main():
     companyTicker = {
         'AMZN',     # Amazon
